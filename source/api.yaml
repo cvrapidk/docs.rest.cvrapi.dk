@@ -16,6 +16,8 @@ info:
       * Only understands JSON
 
     ### Changelog
+      * **2022-01-18**: Added company change endpoint
+      * **2022-01-18**: Changed feed url
       * **2021-04-27**: Updated changed feed
       * **2021-04-15**: Added participant attributes
       * **2021-02-01**: Published documentation
@@ -508,7 +510,7 @@ paths:
     get:
       summary: A list of VAT and last changed date
       description: Returns a list of VAT and last changed date
-      operationId: companyChanged
+      operationId: companyChangedList
       parameters:
         - name: country
           in: path
@@ -520,6 +522,54 @@ paths:
         - name: change_id
           in: path
           description: The last change id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Results
+          headers:
+            'Access-Control-Allow-Origin':
+              $ref: '#/components/headers/Access-Control-Allow-Origin'
+            'Access-Control-Allow-Methods':
+              $ref: '#/components/headers/Access-Control-Allow-Methods'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyChangedListFeed'
+        '400':
+           $ref: '#/components/responses/BadRequestError'
+        '401':
+           $ref: '#/components/responses/UnauthorizedError'
+        '403':
+           $ref: '#/components/responses/ForbiddenError'
+        '404':
+          description: Not found
+        '500':
+           $ref: '#/components/responses/InternalServerError'
+        '501':
+           $ref: '#/components/responses/NotImplementedError'
+      tags:
+        - Feeds
+  /v2/{country}/changed/company/{vat}:
+    summary: Returns last changed date for company
+    description: This resource represents a company and last changed date.
+    get:
+      summary: Company last changed date
+      description: Returns the companies last changed date
+      operationId: companyChanged
+      parameters:
+        - name: country
+          in: path
+          description: Country
+          required: true
+          schema:
+            enum: [dk, no]
+            type: string
+        - name: vat
+          in: path
+          description: VAT
           required: true
           schema:
             type: integer
@@ -1565,7 +1615,7 @@ components:
             substitute_member_for_name:
                type: string
                description: The name of the substitute participant
-    CompanyChangedFeed:
+    CompanyChangedListFeed:
       type: object
       properties:
         vat:
@@ -1586,6 +1636,23 @@ components:
            type: integer
            format: int64
            description: The change id that you need to use for your new request
+    CompanyChangedFeed:
+      type: object
+      properties:
+        vat:
+           type: integer
+           format: int64
+           description: VAT
+        lastupdate:
+          type: object
+          properties:
+            datetime:
+              type: string
+              format: date-time
+              description: Date and time in ISO 8601
+            unix:
+              type: integer
+              format: int64
     Error:
       type: object
       properties:

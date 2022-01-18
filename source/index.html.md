@@ -38,6 +38,8 @@ This API is only for paying customers.
   * Only understands JSON
 
 ### Changelog
+  * **2022-01-18**: Added company change endpoint
+  * **2022-01-18**: Changed feed url
   * **2021-04-27**: Updated changed feed
   * **2021-04-15**: Added participant attributes
   * **2021-02-01**: Published documentation
@@ -1768,7 +1770,7 @@ authentication
 
 ## A list of VAT and last changed date
 
-<a id="opIdcompanyChanged"></a>
+<a id="opIdcompanyChangedList"></a>
 
 > Code samples
 
@@ -1919,6 +1921,182 @@ Returns a list of VAT and last changed date
 |country|no|
 
 <h3 id="a-list-of-vat-and-last-changed-date-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Results|[CompanyChangedListFeed](#schemacompanychangedlistfeed)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|[Error](#schemaerror)|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Authentication information is missing or invalid|None|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|[Error](#schemaerror)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not found|None|
+|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Internal Server Error|[Error](#schemaerror)|
+|501|[Not Implemented](https://tools.ietf.org/html/rfc7231#section-6.6.2)|Internal Server Error|[Error](#schemaerror)|
+
+### Response Headers
+
+|Status|Header|Type|Format|Description|
+|---|---|---|---|---|
+|200|Access-Control-Allow-Origin|string||Origin allowed|
+|200|Access-Control-Allow-Methods|string||Origin method allowed|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+authentication
+</aside>
+
+## Company last changed date
+
+<a id="opIdcompanyChanged"></a>
+
+> Code samples
+
+```shell
+curl --request GET \
+  --url https://rest.cvrapi.dk/v2/dk/changed/company/0 \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Basic {access-token}'
+```
+
+```php
+<?php
+
+$curl = curl_init();
+
+curl_setopt_array($curl, [
+  CURLOPT_URL => "https://rest.cvrapi.dk/v2/dk/changed/company/0",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => [
+    "Accept: application/json",
+    "Authorization: Basic {access-token}"
+  ],
+]);
+
+$response = curl_exec($curl);
+$err = curl_error($curl);
+
+curl_close($curl);
+
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+  echo $response;
+}
+```
+
+```python
+import requests
+
+url = "https://rest.cvrapi.dk/v2/dk/changed/company/0"
+
+headers = {
+    "Accept": "application/json",
+    "Authorization": "Basic {access-token}"
+}
+
+response = requests.request("GET", url, headers=headers)
+
+print(response.text)
+```
+
+```go
+package main
+
+import (
+	"fmt"
+	"net/http"
+	"io/ioutil"
+)
+
+func main() {
+
+	url := "https://rest.cvrapi.dk/v2/dk/changed/company/0"
+
+	req, _ := http.NewRequest("GET", url, nil)
+
+	req.Header.Add("Accept", "application/json")
+	req.Header.Add("Authorization", "Basic {access-token}")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
+}
+```
+
+```javascript
+const data = null;
+
+const xhr = new XMLHttpRequest();
+xhr.withCredentials = true;
+
+xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === this.DONE) {
+    console.log(this.responseText);
+  }
+});
+
+xhr.open("GET", "https://rest.cvrapi.dk/v2/dk/changed/company/0");
+xhr.setRequestHeader("Accept", "application/json");
+xhr.setRequestHeader("Authorization", "Basic {access-token}");
+
+xhr.send(data);
+```
+
+```csharp
+var client = new RestClient("https://rest.cvrapi.dk/v2/dk/changed/company/0");
+var request = new RestRequest(Method.GET);
+request.AddHeader("Accept", "application/json");
+request.AddHeader("Authorization", "Basic {access-token}");
+IRestResponse response = client.Execute(request);
+```
+
+```ruby
+require 'uri'
+require 'net/http'
+require 'openssl'
+
+url = URI("https://rest.cvrapi.dk/v2/dk/changed/company/0")
+
+http = Net::HTTP.new(url.host, url.port)
+http.use_ssl = true
+http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+request = Net::HTTP::Get.new(url)
+request["Accept"] = 'application/json'
+request["Authorization"] = 'Basic {access-token}'
+
+response = http.request(request)
+puts response.read_body
+```
+
+`GET /v2/{country}/changed/company/{vat}`
+
+Returns the companies last changed date
+
+<h3 id="company-last-changed-date-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|country|path|string|true|Country|
+|vat|path|integer(int64)|true|VAT|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|country|dk|
+|country|no|
+
+<h3 id="company-last-changed-date-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -3693,12 +3871,12 @@ continued
 |type|real_owner|
 |type|supervisory_board|
 
-<h2 id="tocS_CompanyChangedFeed">CompanyChangedFeed</h2>
+<h2 id="tocS_CompanyChangedListFeed">CompanyChangedListFeed</h2>
 <!-- backwards compatibility -->
-<a id="schemacompanychangedfeed"></a>
-<a id="schema_CompanyChangedFeed"></a>
-<a id="tocScompanychangedfeed"></a>
-<a id="tocscompanychangedfeed"></a>
+<a id="schemacompanychangedlistfeed"></a>
+<a id="schema_CompanyChangedListFeed"></a>
+<a id="tocScompanychangedlistfeed"></a>
+<a id="tocscompanychangedlistfeed"></a>
 
 ```json
 {
@@ -3721,6 +3899,33 @@ continued
 |» datetime|string(date-time)|Date and time in ISO 8601|
 |» unix|integer(int64)|none|
 |change_id|integer(int64)|The change id that you need to use for your new request|
+
+<h2 id="tocS_CompanyChangedFeed">CompanyChangedFeed</h2>
+<!-- backwards compatibility -->
+<a id="schemacompanychangedfeed"></a>
+<a id="schema_CompanyChangedFeed"></a>
+<a id="tocScompanychangedfeed"></a>
+<a id="tocscompanychangedfeed"></a>
+
+```json
+{
+  "vat": 0,
+  "lastupdate": {
+    "datetime": "2019-08-24T14:15:22Z",
+    "unix": 0
+  }
+}
+
+```
+
+### Properties
+
+|Name|Type|Description|
+|---|---|---|---|---|
+|vat|integer(int64)|VAT|
+|lastupdate|object|none|
+|» datetime|string(date-time)|Date and time in ISO 8601|
+|» unix|integer(int64)|none|
 
 <h2 id="tocS_Error">Error</h2>
 <!-- backwards compatibility -->

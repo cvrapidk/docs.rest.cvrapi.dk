@@ -367,6 +367,9 @@
                   <li>
                     <a href="#a-list-of-vat-and-last-changed-date" class="toc-h2 toc-link" data-title="A list of VAT and last changed date">A list of VAT and last changed date</a>
                   </li>
+                  <li>
+                    <a href="#company-last-changed-date" class="toc-h2 toc-link" data-title="Company last changed date">Company last changed date</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -436,6 +439,9 @@
                     <a href="#tocS_ParticipantRoles" class="toc-h2 toc-link" data-title="ParticipantRoles">ParticipantRoles</a>
                   </li>
                   <li>
+                    <a href="#tocS_CompanyChangedListFeed" class="toc-h2 toc-link" data-title="CompanyChangedListFeed">CompanyChangedListFeed</a>
+                  </li>
+                  <li>
                     <a href="#tocS_CompanyChangedFeed" class="toc-h2 toc-link" data-title="CompanyChangedFeed">CompanyChangedFeed</a>
                   </li>
                   <li>
@@ -467,6 +473,8 @@
 </ul>
 <h3 id='changelog'>Changelog</h3>
 <ul>
+<li><strong>2022-01-18</strong>: Added company change endpoint</li>
+<li><strong>2022-01-18</strong>: Changed feed url</li>
 <li><strong>2021-04-27</strong>: Updated changed feed</li>
 <li><strong>2021-04-15</strong>: Added participant attributes</li>
 <li><strong>2021-02-01</strong>: Published documentation</li>
@@ -3235,7 +3243,7 @@ authentication
 
 <h1 id="cvr-api-feeds">Feeds</h1>
 <h2 id='a-list-of-vat-and-last-changed-date'>A list of VAT and last changed date</h2>
-<p><a id="opIdcompanyChanged"></a></p>
+<p><a id="opIdcompanyChangedList"></a></p>
 
 <blockquote>
 <p>Code samples</p>
@@ -3409,7 +3417,7 @@ authentication
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>Results</td>
-<td><a href="#schemacompanychangedfeed">CompanyChangedFeed</a></td>
+<td><a href="#schemacompanychangedlistfeed">CompanyChangedListFeed</a></td>
 </tr>
 <tr>
 <td>400</td>
@@ -3449,6 +3457,250 @@ authentication
 </tr>
 </tbody></table>
 <h3 id='response-headers-10'>Response Headers</h3>
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Header</th>
+<th>Type</th>
+<th>Format</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>Access-Control-Allow-Origin</td>
+<td>string</td>
+<td></td>
+<td>Origin allowed</td>
+</tr>
+<tr>
+<td>200</td>
+<td>Access-Control-Allow-Methods</td>
+<td>string</td>
+<td></td>
+<td>Origin method allowed</td>
+</tr>
+</tbody></table>
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+authentication
+</aside>
+<h2 id='company-last-changed-date'>Company last changed date</h2>
+<p><a id="opIdcompanyChanged"></a></p>
+
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--request</span> GET <span class="se">\</span>
+  <span class="nt">--url</span> https://rest.cvrapi.dk/v2/dk/changed/company/0 <span class="se">\</span>
+  <span class="nt">--header</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+  <span class="nt">--header</span> <span class="s1">'Authorization: Basic {access-token}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+
+<span class="nv">$curl</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
+
+<span class="nb">curl_setopt_array</span><span class="p">(</span><span class="nv">$curl</span><span class="p">,</span> <span class="p">[</span>
+  <span class="no">CURLOPT_URL</span> <span class="o">=&gt;</span> <span class="s2">"https://rest.cvrapi.dk/v2/dk/changed/company/0"</span><span class="p">,</span>
+  <span class="no">CURLOPT_RETURNTRANSFER</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="no">CURLOPT_ENCODING</span> <span class="o">=&gt;</span> <span class="s2">""</span><span class="p">,</span>
+  <span class="no">CURLOPT_MAXREDIRS</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="no">CURLOPT_TIMEOUT</span> <span class="o">=&gt;</span> <span class="mi">30</span><span class="p">,</span>
+  <span class="no">CURLOPT_HTTP_VERSION</span> <span class="o">=&gt;</span> <span class="no">CURL_HTTP_VERSION_1_1</span><span class="p">,</span>
+  <span class="no">CURLOPT_CUSTOMREQUEST</span> <span class="o">=&gt;</span> <span class="s2">"GET"</span><span class="p">,</span>
+  <span class="no">CURLOPT_HTTPHEADER</span> <span class="o">=&gt;</span> <span class="p">[</span>
+    <span class="s2">"Accept: application/json"</span><span class="p">,</span>
+    <span class="s2">"Authorization: Basic </span><span class="si">{</span><span class="nv">access-token</span><span class="si">}</span><span class="s2">"</span>
+  <span class="p">],</span>
+<span class="p">]);</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$curl</span><span class="p">);</span>
+<span class="nv">$err</span> <span class="o">=</span> <span class="nb">curl_error</span><span class="p">(</span><span class="nv">$curl</span><span class="p">);</span>
+
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$curl</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nv">$err</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="s2">"cURL Error #:"</span> <span class="mf">.</span> <span class="nv">$err</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://rest.cvrapi.dk/v2/dk/changed/company/0"</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">"Accept"</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span>
+    <span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Basic {access-token}"</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">package</span> <span class="n">main</span>
+
+<span class="k">import</span> <span class="p">(</span>
+    <span class="s">"fmt"</span>
+    <span class="s">"net/http"</span>
+    <span class="s">"io/ioutil"</span>
+<span class="p">)</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="n">url</span> <span class="o">:=</span> <span class="s">"https://rest.cvrapi.dk/v2/dk/changed/company/0"</span>
+
+    <span class="n">req</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="no">nil</span><span class="p">)</span>
+
+    <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"Accept"</span><span class="p">,</span> <span class="s">"application/json"</span><span class="p">)</span>
+    <span class="n">req</span><span class="o">.</span><span class="n">Header</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"Authorization"</span><span class="p">,</span> <span class="s">"Basic {access-token}"</span><span class="p">)</span>
+
+    <span class="n">res</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">DefaultClient</span><span class="o">.</span><span class="n">Do</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+
+    <span class="k">defer</span> <span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span>
+    <span class="n">body</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">ioutil</span><span class="o">.</span><span class="n">ReadAll</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="p">)</span>
+
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="kt">string</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+
+<span class="p">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">withCredentials</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">readystatechange</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">readyState</span> <span class="o">===</span> <span class="k">this</span><span class="p">.</span><span class="nx">DONE</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">responseText</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">https://rest.cvrapi.dk/v2/dk/changed/company/0</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="dl">"</span><span class="s2">Accept</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Basic {access-token}</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RestClient</span><span class="p">(</span><span class="s">"https://rest.cvrapi.dk/v2/dk/changed/company/0"</span><span class="p">);</span>
+<span class="kt">var</span> <span class="n">request</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RestRequest</span><span class="p">(</span><span class="n">Method</span><span class="p">.</span><span class="n">GET</span><span class="p">);</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">AddHeader</span><span class="p">(</span><span class="s">"Accept"</span><span class="p">,</span> <span class="s">"application/json"</span><span class="p">);</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">AddHeader</span><span class="p">(</span><span class="s">"Authorization"</span><span class="p">,</span> <span class="s">"Basic {access-token}"</span><span class="p">);</span>
+<span class="n">IRestResponse</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">Execute</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
+</code></pre></div><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'uri'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'openssl'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://rest.cvrapi.dk/v2/dk/changed/company/0"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"Accept"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'application/json'</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"Authorization"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Basic {access-token}'</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre></div>
+<p><code>GET /v2/{country}/changed/company/{vat}</code></p>
+
+<p>Returns the companies last changed date</p>
+
+<h3 id="company-last-changed-date-parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>country</td>
+<td>path</td>
+<td>string</td>
+<td>true</td>
+<td>Country</td>
+</tr>
+<tr>
+<td>vat</td>
+<td>path</td>
+<td>integer(int64)</td>
+<td>true</td>
+<td>VAT</td>
+</tr>
+</tbody></table>
+<h4 id='enumerated-values-11'>Enumerated Values</h4>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>country</td>
+<td>dk</td>
+</tr>
+<tr>
+<td>country</td>
+<td>no</td>
+</tr>
+</tbody></table>
+
+<h3 id="company-last-changed-date-responses">Responses</h3>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>Results</td>
+<td><a href="#schemacompanychangedfeed">CompanyChangedFeed</a></td>
+</tr>
+<tr>
+<td>400</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
+<td>Bad Request</td>
+<td><a href="#schemaerror">Error</a></td>
+</tr>
+<tr>
+<td>401</td>
+<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
+<td>Authentication information is missing or invalid</td>
+<td>None</td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>Forbidden</td>
+<td><a href="#schemaerror">Error</a></td>
+</tr>
+<tr>
+<td>404</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
+<td>Not found</td>
+<td>None</td>
+</tr>
+<tr>
+<td>500</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.1">Internal Server Error</a></td>
+<td>Internal Server Error</td>
+<td><a href="#schemaerror">Error</a></td>
+</tr>
+<tr>
+<td>501</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.2">Not Implemented</a></td>
+<td>Internal Server Error</td>
+<td><a href="#schemaerror">Error</a></td>
+</tr>
+</tbody></table>
+<h3 id='response-headers-11'>Response Headers</h3>
 <table><thead>
 <tr>
 <th>Status</th>
@@ -4474,7 +4726,7 @@ authentication
 <td>If this company is a holding company</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-11'>Enumerated Values</h4>
+<h4 id='enumerated-values-12'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Property</th>
@@ -4839,7 +5091,7 @@ authentication
 <td>Start date for this status</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-12'>Enumerated Values</h4>
+<h4 id='enumerated-values-13'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Property</th>
@@ -5025,7 +5277,7 @@ authentication
 <td>If this company is a bankrupt</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-13'>Enumerated Values</h4>
+<h4 id='enumerated-values-14'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Property</th>
@@ -5573,7 +5825,7 @@ authentication
 <td>The amount of tax the company paid</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-14'>Enumerated Values</h4>
+<h4 id='enumerated-values-15'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Property</th>
@@ -6646,7 +6898,7 @@ authentication
 <td>The value</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-15'>Enumerated Values</h4>
+<h4 id='enumerated-values-16'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Property</th>
@@ -6758,7 +7010,7 @@ authentication
 <td>The name of the substitute participant</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-16'>Enumerated Values</h4>
+<h4 id='enumerated-values-17'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Property</th>
@@ -6811,14 +7063,14 @@ authentication
 </tr>
 </tbody></table>
 
-<h2 id="tocS_CompanyChangedFeed">CompanyChangedFeed</h2>
+<h2 id="tocS_CompanyChangedListFeed">CompanyChangedListFeed</h2>
 
 <!-- backwards compatibility -->
 
-<p><a id="schemacompanychangedfeed"></a>
-<a id="schema_CompanyChangedFeed"></a>
-<a id="tocScompanychangedfeed"></a>
-<a id="tocscompanychangedfeed"></a></p>
+<p><a id="schemacompanychangedlistfeed"></a>
+<a id="schema_CompanyChangedListFeed"></a>
+<a id="tocScompanychangedlistfeed"></a>
+<a id="tocscompanychangedlistfeed"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"vat"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"lastupdate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -6863,6 +7115,52 @@ authentication
 </tr>
 </tbody></table>
 
+<h2 id="tocS_CompanyChangedFeed">CompanyChangedFeed</h2>
+
+<!-- backwards compatibility -->
+
+<p><a id="schemacompanychangedfeed"></a>
+<a id="schema_CompanyChangedFeed"></a>
+<a id="tocScompanychangedfeed"></a>
+<a id="tocscompanychangedfeed"></a></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"vat"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"lastupdate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"datetime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-08-24T14:15:22Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"unix"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div><h3 id='properties-23'>Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>vat</td>
+<td>integer(int64)</td>
+<td>VAT</td>
+</tr>
+<tr>
+<td>lastupdate</td>
+<td>object</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» datetime</td>
+<td>string(date-time)</td>
+<td>Date and time in ISO 8601</td>
+</tr>
+<tr>
+<td>» unix</td>
+<td>integer(int64)</td>
+<td>none</td>
+</tr>
+</tbody></table>
+
 <h2 id="tocS_Error">Error</h2>
 
 <!-- backwards compatibility -->
@@ -6876,7 +7174,7 @@ authentication
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre></div><h3 id='properties-23'>Properties</h3>
+</span></code></pre></div><h3 id='properties-24'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -6895,7 +7193,7 @@ authentication
 <td>Message that gives more information on the error</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-17'>Enumerated Values</h4>
+<h4 id='enumerated-values-18'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Property</th>

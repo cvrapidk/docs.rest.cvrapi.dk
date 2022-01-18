@@ -1774,7 +1774,7 @@ authentication
 
 ```shell
 curl --request GET \
-  --url https://rest.cvrapi.dk/v2/dk/changed/company/0 \
+  --url https://rest.cvrapi.dk/v2/dk/changed/list/company/0 \
   --header 'Accept: application/json' \
   --header 'Authorization: Basic {access-token}'
 ```
@@ -1785,7 +1785,7 @@ curl --request GET \
 $curl = curl_init();
 
 curl_setopt_array($curl, [
-  CURLOPT_URL => "https://rest.cvrapi.dk/v2/dk/changed/company/0",
+  CURLOPT_URL => "https://rest.cvrapi.dk/v2/dk/changed/list/company/0",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -1813,7 +1813,7 @@ if ($err) {
 ```python
 import requests
 
-url = "https://rest.cvrapi.dk/v2/dk/changed/company/0"
+url = "https://rest.cvrapi.dk/v2/dk/changed/list/company/0"
 
 headers = {
     "Accept": "application/json",
@@ -1836,7 +1836,7 @@ import (
 
 func main() {
 
-	url := "https://rest.cvrapi.dk/v2/dk/changed/company/0"
+	url := "https://rest.cvrapi.dk/v2/dk/changed/list/company/0"
 
 	req, _ := http.NewRequest("GET", url, nil)
 
@@ -1866,7 +1866,7 @@ xhr.addEventListener("readystatechange", function () {
   }
 });
 
-xhr.open("GET", "https://rest.cvrapi.dk/v2/dk/changed/company/0");
+xhr.open("GET", "https://rest.cvrapi.dk/v2/dk/changed/list/company/0");
 xhr.setRequestHeader("Accept", "application/json");
 xhr.setRequestHeader("Authorization", "Basic {access-token}");
 
@@ -1874,7 +1874,7 @@ xhr.send(data);
 ```
 
 ```csharp
-var client = new RestClient("https://rest.cvrapi.dk/v2/dk/changed/company/0");
+var client = new RestClient("https://rest.cvrapi.dk/v2/dk/changed/list/company/0");
 var request = new RestRequest(Method.GET);
 request.AddHeader("Accept", "application/json");
 request.AddHeader("Authorization", "Basic {access-token}");
@@ -1886,7 +1886,7 @@ require 'uri'
 require 'net/http'
 require 'openssl'
 
-url = URI("https://rest.cvrapi.dk/v2/dk/changed/company/0")
+url = URI("https://rest.cvrapi.dk/v2/dk/changed/list/company/0")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
@@ -1900,7 +1900,7 @@ response = http.request(request)
 puts response.read_body
 ```
 
-`GET /v2/{country}/changed/company/{change_id}`
+`GET /v2/{country}/changed/list/company/{change_id}`
 
 Returns a list of VAT and last changed date
 

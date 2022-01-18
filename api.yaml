@@ -502,7 +502,7 @@ paths:
            $ref: '#/components/responses/NotImplementedError'
       tags:
         - Participant
-  /v2/{country}/changed/company/{change_id}:
+  /v2/{country}/changed/list/company/{change_id}:
     summary: Returns a list of VAT and last changed date
     description: This resource represents a list of VAT and last changed date.
     get:

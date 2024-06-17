@@ -820,7 +820,7 @@ components:
         description:
            type: string
            nullable: true
-           enum: [A/S, ABA, AMT, ANS, APS, DØD, E/S, EFO, ENK, EUO, EØF, FAP, FAS, FBA, FES, FEØ, FFO, FIV, FKI, FMA, FON, FOR, GUS, I/S, IVS, K/S, KAS, KOM, MSS, PAR, PMV, REG, SCE, SMA, SOV, STA, TRU, UDL, UOP, ØVR]
+           enum: [ENK, PMV, DØD, I/S, K/S, MSS, PAR, A/S, KAS, APS, IVS, FON, TRU, EFO, FOR, FFO, ANS, ABA, FBA, SMA, FMA, EØF, FAS, FAP, FBA, SCE, UDL, FEØ, STA, SOV, AMT, REG, KOM, FKI, EUO, ØVR, FIV, E/S, FES, GUS, UOP]
            description: Company form description
         longdescription:
            type: string
